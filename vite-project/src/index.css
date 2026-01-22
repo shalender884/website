@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+@utility wrapper{
+  m-width:50px
+}
