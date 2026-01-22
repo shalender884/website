@@ -100,13 +100,14 @@ function AuthPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
-          <form className="space-y-6" onSubmit={sumbitHandler}>
+          <form className="" onSubmit={sumbitHandler}>
             {view === "signup" && (
-              <div>
+              <div className="">
                 <label className="block text-sm font-medium text-gray-700">
                   Full Name
                 </label>
                 <input
+                onFocus={()=>fieldErrors?.username===""}
                   autoComplete="true"
                   onChange={changeHanlder}
                   name="username"
@@ -116,12 +117,16 @@ function AuthPage() {
                 />
               </div>
             )}
+            {isValidationError && fieldErrors?.username && (
+              <p className="text-red-500 text-sm">{fieldErrors.username}</p>
+            )}
 
-            <div>
+            <div className="mt-5">
               <label className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <input
+              
                 autoComplete="true"
                 onChange={changeHanlder}
                 type="email"
@@ -132,7 +137,7 @@ function AuthPage() {
               />
             </div>
             {view !== "forgot" && (
-              <div>
+              <div className="mt-5">
                 <label className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
@@ -165,13 +170,7 @@ function AuthPage() {
                     </p>
                   </div>
                 )}
-                {isError && (
-                  <div>
-                    <p className=" text-red-500">
-                      {error?.response?.data?.message}
-                    </p>
-                  </div>
-                )}
+               
                 {isError && !isValidationError && (
                   <p className="text-red-500">{apiError?.message}</p>
                 )}
@@ -202,7 +201,7 @@ function AuthPage() {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                className="w-full flex justify-center mt-5 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 {view === "login" && "Sign In"}
                 {view === "signup" && "Register"}
